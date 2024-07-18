@@ -1,34 +1,34 @@
 import { useEffect } from "react"
-import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useReviewsContext } from "../hooks/useReviewsContext"
 
 // components
-import WorkoutDetails from "../components/WorkoutDetails"
-import WorkoutForm from "../components/WorkoutForm"
+import ReviewDetails from "../components/ReviewDetails"
+import ReviewForm from "../components/ReviewForm"
 
 const Home = () => {
-  const {workouts, dispatch} = useWorkoutsContext()
+  const {reviews, dispatch} = useReviewsContext()
 
   useEffect(() => {
-    const fetchWorkouts = async () => {
-      const response = await fetch('/api/workouts')
+    const fetchReviews = async () => {
+      const response = await fetch('/api/reviews')
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_WORKOUTS', payload: json})
+        dispatch({type: 'SET_REVIEWS', payload: json})
       }
     }
 
-    fetchWorkouts()
+    fetchReviews()
   },[dispatch])
 
   return (
     <div className="home">
-      <div className="workouts">
-        {workouts && workouts.map(workout => ( // if workouts is not null, then map over it
-          <WorkoutDetails workout={workout} key={workout._id} />
+      <div className="reviews">
+        {reviews && reviews.map(review => ( // if reviews is not null, then map over it
+          <ReviewDetails review={review} key={review._id} />
         ))}
       </div>
-      <WorkoutForm />
+      <ReviewForm />
     </div>
   )
 }
