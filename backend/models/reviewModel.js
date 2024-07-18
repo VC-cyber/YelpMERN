@@ -26,8 +26,15 @@ const reviewSchema = new Schema({
     groupchats: {
         type: [String],
         required: true
+    }, 
+    photo: {
+        type: Buffer,
+        required: false
+    },
+    photoMimeType: {
+        type: String,
+        required: false
     }
-
 
 }, {timestamps: true})
 

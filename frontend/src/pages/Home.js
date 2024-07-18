@@ -6,25 +6,26 @@ import ReviewDetails from "../components/ReviewDetails"
 import ReviewForm from "../components/ReviewForm"
 
 const Home = () => {
-  const {reviews, dispatch} = useReviewsContext()
+  const {review, dispatch} = useReviewsContext()
 
   useEffect(() => {
     const fetchReviews = async () => {
       const response = await fetch('/api/reviews')
       const json = await response.json()
-
+      
       if (response.ok) {
-        dispatch({type: 'SET_REVIEWS', payload: json})
+        dispatch({type: 'SET_REVIEW', payload: json})
       }
     }
 
     fetchReviews()
+    //console.log(reviews)
   },[dispatch])
 
   return (
     <div className="home">
       <div className="reviews">
-        {reviews && reviews.map(review => ( // if reviews is not null, then map over it
+        {review && review.map(review => ( // if reviews is not null, then map over it
           <ReviewDetails review={review} key={review._id} />
         ))}
       </div>

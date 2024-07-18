@@ -1,5 +1,6 @@
 const Review = require('../models/reviewModel')
 const mongoose = require('mongoose')
+const multer = require('multer')
 //get all workouts
 const getReviews = async (req, res) => {
     const reviews = await Review.find({}).sort({createdAt: -1})
@@ -43,13 +44,21 @@ const createReview = async (req, res) => {
     if(!groupchats){
         emptyFields.push('groupchats')
     }
+    // if(!photo){
+    //     emptyFields.push('photo')
+    // }
     if(emptyFields.length > 0){
         return res.status(400).json({error: `Please fill in the following fields:`, emptyFields})
     }
+
+    // let photo, photoMimeType;
+    // if(req.file){
+    //     photo = req.file.buffer
+    //     photoMimeType = req.file.mimetype
+    // }
     try {
-        
         const review = await Review.create({restaurantName, rating, city, state, description, groupchats})
-        res.stats(200).json(review)
+        res.status(200).json(review)
     }catch(error) {
         res.status(400).json({error: error.message})
     }
