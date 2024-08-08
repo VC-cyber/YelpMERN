@@ -3,12 +3,12 @@ import { useReviewsContext } from "../hooks/useReviewsContext"
 
 const ReviewForm = () => {
   const {dispatch} = useReviewsContext()
-  const [title, setTitle] = useState('')
+  const [restaurantName, setRestaurantName] = useState('')
   const [rating, setRating] = useState('')
   const [description, setDescription] = useState('')
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
-  const [groupchat, setGroupchat] = useState('')
+  const [groupchats, setGroupchats] = useState('')
   const [photo, setPhoto] = useState('')
   //const []
   const [error, setError] = useState(null)
@@ -17,7 +17,7 @@ const ReviewForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const review = {title, rating, description, city, state, groupchat}
+    const review = {restaurantName, rating, description, city, state, groupchats}
     
     const response = await fetch('/api/reviews', { //change workouts to reviews
       method: 'POST',
@@ -34,12 +34,12 @@ const ReviewForm = () => {
     }
     if (response.ok) {
       setError(null)
-      setTitle('')
+      setRestaurantName('')
       setRating('')
       setDescription('')
       setCity('')
       setState('')
-      setGroupchat('')
+      setGroupchats('')
       setPhoto('')
       setEmptyFields([])
       console.log('new review added:', json)
@@ -55,9 +55,9 @@ const ReviewForm = () => {
       <label>Restaurant Name:</label>
       <input 
         type="text" 
-        onChange={(e) => setTitle(e.target.value)} 
-        value={title}
-        className = {emptyFields.includes('title') ? 'error' : ''}
+        onChange={(e) => setRestaurantName(e.target.value)} 
+        value={restaurantName}
+        className = {emptyFields.includes('restaurantName') ? 'error' : ''}
       />
 
       <label>Rating(out of 10):</label>
@@ -95,9 +95,9 @@ const ReviewForm = () => {
       <label>Groupchats:</label>
       <input 
         type="text" 
-        onChange={(e) => setGroupchat(e.target.value)} 
-        value={groupchat}
-        className = {emptyFields.includes('groupchat') ? 'error' : ''}
+        onChange={(e) => setGroupchats(e.target.value)} 
+        value={groupchats}
+        className = {emptyFields.includes('groupchats') ? 'error' : ''}
       />  
 
       <label>Photo of your food:</label>

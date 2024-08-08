@@ -7,6 +7,7 @@ const getReviews = async (req, res) => {
     res.status(200).json(reviews)
 }
 const getReview = async (req, res) => {
+    console.log("here!")
     const { id } = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).json({error: 'No such review'})
